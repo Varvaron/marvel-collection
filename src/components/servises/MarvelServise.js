@@ -27,7 +27,7 @@ class MarvelServise {
 
     return {
         name: character.name,
-        description: character.description ? character.description.slice(0, 225) : 'The description is not available',
+        description: character.description ? character.description.slice(0, 225) : 'There is no description for this characher',
         thumbnail: character.thumbnail.path + '.' + character.thumbnail.extension,
         homepage: character.urls[0].url,
         wiki: character.urls[1].url,

@@ -7,11 +7,6 @@ import './randomChar.scss';
 import mjolnir from '../../resources/img/mjolnir.png';
 
 class RandomChar extends Component {
-    constructor(props) {
-        super(props);
-        this.updateCharacter();
-    }
-
     state = {
         character: {},
         loading: true,
@@ -19,6 +14,10 @@ class RandomChar extends Component {
     }
 
     marvelServise = new MarvelServise();
+
+    componentDidMount() {
+        this.updateCharacter();
+    }
 
     onErrorCatch = () => {
         this.setState({
@@ -66,9 +65,15 @@ class RandomChar extends Component {
 
 const CharacterView = ({character}) => {
     const { name, description, thumbnail, homepage, wiki} = character;
+    let imageClasses = 'randomchar__img';
+
+    if (thumbnail === 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg') {
+        imageClasses += ' randomchar__img--notavailable';
+    }
+
     return (
         <div className="randomchar__block">
-            <img src={thumbnail} alt="Random character" className="randomchar__img"/>
+            <img src={thumbnail} alt="Random character" className={imageClasses}/>
             <div className="randomchar__info">
                 <p className="randomchar__name">{name}</p>
                 <p className="randomchar__descr">{description}</p>
