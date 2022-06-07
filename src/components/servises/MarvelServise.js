@@ -26,6 +26,7 @@ class MarvelServise {
     changeCharacter = (character) => {
 
     return {
+        id: character.id,
         name: character.name,
         description: character.description ? character.description.slice(0, 225) : 'There is no description for this characher',
         thumbnail: character.thumbnail.path + '.' + character.thumbnail.extension,
