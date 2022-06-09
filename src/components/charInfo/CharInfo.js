@@ -2,7 +2,7 @@ import { Component, Fragment } from 'react/cjs/react.production.min';
 import Spinner from '../spinner/Spinner';
 import ErrorMessage from '../errorMessage/ErrorMessage';
 import MarvelServise from '../servises/MarvelServise';
-import Skeleton from '../skeleton/Skeleton.js'
+import Skeleton from '../skeleton/Skeleton.js';
 import './charInfo.scss';
 
 class CharInfo extends Component {
