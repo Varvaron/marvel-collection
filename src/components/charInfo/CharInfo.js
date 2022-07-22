@@ -1,7 +1,7 @@
 import { useState, useEffect, Fragment } from 'react';
 import Spinner from '../spinner/Spinner';
 import ErrorMessage from '../errorMessage/ErrorMessage';
-import MarvelServise from '../servises/MarvelServise';
+import MarvelService from '../services/MarvelService';
 import Skeleton from '../skeleton/Skeleton.js';
 import './charInfo.scss';
 
@@ -10,7 +10,7 @@ const CharInfo = (props) =>  {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
 
-    const marvelServise = new MarvelServise();
+    const marvelService = new MarvelService();
 
     useEffect(() => {
         updateCharacter();
@@ -39,7 +39,7 @@ const CharInfo = (props) =>  {
 
         onCharacterLoading();
         
-        marvelServise
+        marvelService
             .getCharacter(characterId)
             .then(onCharacterLoaded)
             .catch(onErrorCatch);
