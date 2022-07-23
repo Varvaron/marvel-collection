@@ -1,4 +1,4 @@
-import { useState, useEffect, Fragment } from 'react';
+import { useState, useEffect, Fragment, useCallback } from 'react';
 import Spinner from '../spinner/Spinner';
 import ErrorMessage from '../errorMessage/ErrorMessage';
 import MarvelService from '../services/MarvelService';
@@ -30,6 +30,8 @@ const CharInfo = (props) =>  {
         setLoading(false);
     }
 
+    const clearError = useCallback(() => setError(null), []);
+
     const updateCharacter = () => {
         const {characterId} = props;
 
@@ -38,6 +40,8 @@ const CharInfo = (props) =>  {
         }
 
         onCharacterLoading();
+        
+        clearError();
         
         marvelService
             .getCharacter(characterId)

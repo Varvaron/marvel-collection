@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import Spinner from '../spinner/Spinner';
 import ErrorMessage from '../errorMessage/ErrorMessage';
-import MarvelService from '../services/MarvelServiсe';
+import MarvelService from '../services/MarvelService';
 
 import './charList.scss';
 
@@ -16,18 +16,21 @@ const CharList = (props) => {
     const marvelService = new MarvelService();
 
     useEffect(() => {
-        onRequest();
+        onRequest(offset, true);
     }, []);
 
-    const onRequest = (offset) => {
-        onCharactersLoading();
+    const onRequest = (offset, initial) => {
+        initial ? setNewItemLoading(false) : setNewItemLoading(true);
+
+        onCharListLoading();
         marvelService.getAllCharacters(offset)
             .then(onCharactersListLoaded)
             .catch(onErrorCatch)
     }
 
-    const onCharactersLoading = () => 
-    setNewItemLoading(true);
+    const onCharListLoading = () => {
+        setNewItemLoading(true);
+    }
 
     const onCharactersListLoaded = (newCharactersList) => {
         let endOfList = false;
@@ -77,13 +80,12 @@ const CharList = (props) => {
     
     const errorMessage = error ? <ErrorMessage/> : null;
     const spinner = loading ? <Spinner/> : null;
-    const content = items ? items : null;
 
     return (
         <div className="char__list">
             {errorMessage}
             {spinner}
-            {content}
+            {items}
             <button className="button button__main button__long"
                 disabled={newItemLoading}
                 style={{'display': listEnded ? 'none' : 'block'}}
