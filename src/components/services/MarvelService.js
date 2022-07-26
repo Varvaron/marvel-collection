@@ -24,6 +24,11 @@ class MarvelService {
         return this._changeCharacter(item.data.results[0]);
     }
 
+    getAllComics = async (offset = 0) => {
+        const res = await this.getResource(`${this._apiBase}comics?orderBy=issueNumber&limit=8&offset=${offset}&${this._apiKey}`);
+        return res.data.results.map(this._transformComics);
+    }
+
     getComics = async (id) => {
         const res = await this.getResource(`${this._apiBase}comics/${id}?${this._apiKey}`);
         return this._transformComics(res.data.results[0]);
